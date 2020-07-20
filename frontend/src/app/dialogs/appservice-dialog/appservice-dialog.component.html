@@ -1,0 +1,83 @@
+<h1 mat-dialog-title>{{action}}</h1>
+<div mat-dialog-content>
+  <form  [formGroup]="formApplication">
+    <div *ngIf="action != 'Delete'; else elseTemplate">
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" placeholder="appCode" formControlName="appCode" required >
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('appCode', 'required')">App code is required</mat-error>
+          <mat-error *ngIf="hasError('appCode', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" placeholder="name"  formControlName="name" required >
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" placeholder="description"  formControlName="description" required >
+          <mat-hint align="end">Not more then 250 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('description', 'required')">Description is required</mat-error>
+          <mat-error *ngIf="hasError('description', 'maxlength')">You have more than 250 characters</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" placeholder="serviceCode" formControlName="serviceCode" required >
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('serviceCode', 'required')">Service Code is required</mat-error>
+          <mat-error *ngIf="hasError('serviceCode', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-label>Choose a type</mat-label>
+          <mat-select placeholder="type" formControlName="type" required>
+            <mat-option value="HTTP">HTTP</mat-option>
+            <mat-option value="SAML">SAML</mat-option>
+            <mat-option value="SSH">SSH</mat-option>
+            <mat-option value="JDBC">JDBC</mat-option>
+            <mat-option value="ODBC">ODBC</mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('type', 'required')">Type is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-label>Choose a sub type</mat-label>
+          <mat-select placeholder="subType"  formControlName="subType" required>
+            <mat-option value="REST">REST</mat-option>
+            <mat-option value="SOAP">SOAP</mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('subType', 'required')">Sub type is required</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <ng-template #elseTemplate>
+      Sure to delete ?
+      <div><b>{{appservice.appCode}}</b></div>
+      <div><b>{{appservice.name}}</b></div>
+      <div><b>{{appservice.description}}</b></div>
+      <div><b>{{appservice.serviceCode}}</b></div>
+      <div><b>{{appservice.type}}</b></div>
+      <div><b>{{appservice.subType}}</b></div>
+    </ng-template>
+  </form>
+</div>
+
+<div mat-dialog-actions align="center">
+  <button mat-raised-button mat-primary color="primary" [disabled]="isDisabled()" (click)="doAction()">{{action}}</button>
+  <button mat-flat-button color="warn" (click)="closeDialog()" >Cancel</button>
+</div>

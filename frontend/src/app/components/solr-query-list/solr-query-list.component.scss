@@ -1,0 +1,13 @@
+* .space {
+    margin-left: 2.5em;
+}
+
+.auto-width {
+    .mat-form-field {
+        width: auto !important;
+    }
+    .mat-select-value {
+        max-width: 100%;
+        width: auto;
+    }  
+}
