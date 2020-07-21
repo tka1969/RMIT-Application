@@ -19,6 +19,6 @@ public interface ApplicationSolrRepository extends SolrCrudRepository<Applicatio
   List<ApplicationSolrDocument> findByNameAndServiceCodeIsNotNull(String searchTerm);
 
   
-  List<ApplicationSolrDocument> findByAppCodeInAndServiceCodeIsNull(Collection<String> appCode);
-  List<ApplicationSolrDocument> findByServiceCodeIn(Collection<String> serviceCode);
+  List<ApplicationSolrDocument> findByAppCodeInAndServiceCodeIsNotNull(Collection<String> appCode);
+  List<ApplicationSolrDocument> findByAppCodeInAndServiceCodeIsNull(Collection<String> serviceCode);
 }

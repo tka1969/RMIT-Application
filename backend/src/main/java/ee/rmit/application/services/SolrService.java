@@ -20,8 +20,8 @@ public class SolrService {
   //otsida rakenduse nime järgi ning vastusena saan selle rakenduse kõik teenused koos lisaväljade infoga.
   public List<ApplicationSolrDocument> findServicesByApplicationName(String searchTerm) {
   	List<ApplicationSolrDocument> applications = applicationSolrRepository.findByNameAndServiceCodeIsNull(searchTerm);
-  	Set<String> codes = applications.stream().map(item -> item.getServiceCode()).collect(Collectors.toSet());
-  	return codes.isEmpty() ? new ArrayList<>() : applicationSolrRepository.findByServiceCodeIn(new ArrayList<>(codes));
+  	Set<String> codes = applications.stream().map(item -> item.getAppCode()).collect(Collectors.toSet());
+  	return codes.isEmpty() ? new ArrayList<>() : applicationSolrRepository.findByAppCodeInAndServiceCodeIsNotNull(new ArrayList<>(codes));
   }
   
   //otsida teenuse nime järgi ning vastusena saan rakenduse koos tema lisaväljade infoga.  
